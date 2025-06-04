@@ -1,6 +1,6 @@
 import { config } from './config/index.js'
 import { errorConverter, errorHandler } from './middleware/error.middleware.js'
-import { swaggerSpec } from './config/swagger.js'
+import { swaggerSpec } from './config/swagger.config.js'
 import ApiError from './utils/ApiError.js'
 import applyMiddleware from './middleware/index.js'
 import dotenv from 'dotenv'

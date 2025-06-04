@@ -2,7 +2,7 @@ import express from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
 import morgan from 'morgan'
-import { apiLimiter } from '../config/rateLimits.js'
+import { apiLimiter } from './rateLimiter.middleware.js'
 import { responseEnhancer } from './responseEnhancer.middleware.js'
 import { config } from '../config/index.js'
 

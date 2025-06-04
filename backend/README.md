@@ -187,9 +187,8 @@ plat_form/
 │   │   ├── config/
 │   │   │   ├── db.config.js  
 │   │   │   ├── index.js  
-│   │   │   ├── rateLimits.js  
 │   │   │   ├── redis.config.js  
-│   │   │   ├── swagger.js  
+│   │   │   ├── swagger.config.js  
 │   │   ├── controllers/
 │   │   │   ├── auth.controller.js  
 │   │   │   ├── user.controller.js  
@@ -197,6 +196,7 @@ plat_form/
 │   │   │   ├── auth.middleware.js  
 │   │   │   ├── error.middleware.js  
 │   │   │   ├── index.js  
+│   │   │   ├── rateLimiter.middleware.js  
 │   │   │   ├── responseEnhancer.middleware.js  
 │   │   │   ├── validate.middleware.js  
 │   │   ├── models/
