@@ -3,9 +3,9 @@ import authService from '../services/auth.service.js'
 
 const register = async (req, res, next) => {
   try {
-    const { user, tokens } = await authService.register(req.body)
+    const { user, roles, tokens } = await authService.register(req.body)
 
-    const responseData = { user, tokens }
+    const responseData = { user, roles, tokens }
     res.api(httpStatus.CREATED, 'success', responseData)
   } catch (error) {
     next(error)
@@ -15,9 +15,9 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body
-    const { user, tokens } = await authService.loginWithEmailAndPassword(email, password)
+    const { user, roles, tokens } = await authService.loginWithEmailAndPassword(email, password)
 
-    const responseData = { user, tokens }
+    const responseData = { user, roles, tokens }
     res.api(httpStatus.OK, 'success', responseData)
   } catch (error) {
     next(error)

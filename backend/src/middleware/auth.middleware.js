@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken'
 import ApiError from '../utils/ApiError.js'
 import authService from '../services/auth.service.js'
-import db from '../models/index.js'
+import { db } from '../models/index.js'
+import { config } from '../config/index.js'
 
 const { User } = db
 
@@ -17,7 +18,7 @@ export const authenticate = async (req, res, next) => {
       throw new ApiError(401, 'Token revoked')
     }
 
-    const payload = jwt.verify(token, config.port.jwtSecret)
+    const payload = jwt.verify(token, config.jwtSecret)
     if (payload.type !== 'access') {
       throw new ApiError(401, 'Invalid token type')
     }

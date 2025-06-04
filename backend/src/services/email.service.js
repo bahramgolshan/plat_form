@@ -3,19 +3,19 @@ import logger from '../utils/logger.js'
 import { config } from '../config/index.js'
 
 const transporter = nodemailer.createTransport({
-  host: config.port.smtpHost,
-  port: config.port.smtpPort,
-  secure: config.port.smtpPort === '465', // true for 465, false for other ports
+  host: config.smtpHost,
+  port: config.smtpPort,
+  secure: config.smtpPort === '465', // true for 465, false for other ports
   auth: {
-    user: config.port.smtpUsername,
-    pass: config.port.smtpPassword,
+    user: config.smtpUsername,
+    pass: config.smtpPassword,
   },
 })
 
 const sendEmail = async (mailOptions) => {
   try {
     const info = await transporter.sendMail({
-      from: `"${config.port.emailFrom_NAME || 'No Reply'}" <${config.port.emailFrom}>`,
+      from: `"${config.emailFrom_NAME || 'No Reply'}" <${config.emailFrom}>`,
       ...mailOptions,
     })
 

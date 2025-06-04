@@ -4,6 +4,8 @@ class ApiResponse {
     this.message = message
     this.data = data
   }
+
+  timestamp = new Date().toISOString()
 }
 
 export default ApiResponse

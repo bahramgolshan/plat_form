@@ -1,8 +1,8 @@
 import express from 'express'
-import { authenticate } from '../middleware/auth.middleware.js'
-import { validate } from '../middleware/validate.middleware.js'
-import userValidation from '../validations/user.validation.js'
-import userController from '../controllers/user.controller.js'
+import { authenticate } from '../../middleware/auth.middleware.js'
+import { validate } from '../../middleware/validate.middleware.js'
+import userValidation from '../../validations/user.validation.js'
+import userController from '../../controllers/user.controller.js'
 
 const router = express.Router()
 
@@ -10,14 +10,7 @@ router.use(authenticate)
 
 /**
  * @swagger
- * tags:
- *   name: Users
- *   description: User management endpoints
- */
-
-/**
- * @swagger
- * /users/me:
+ * /api/users/me:
  *   get:
  *     summary: Get current user profile
  *     tags: [Users]
@@ -33,7 +26,7 @@ router.get('/me', userController.getProfile)
 
 /**
  * @swagger
- * /users/me:
+ * /api/users/me:
  *   patch:
  *     summary: Update current user profile
  *     tags: [Users]
@@ -62,7 +55,7 @@ router.patch('/me', validate(userValidation.updateProfile), userController.updat
 
 /**
  * @swagger
- * /users/me/change-password:
+ * /api/users/me/change-password:
  *   patch:
  *     summary: Change password
  *     tags: [Users]
@@ -101,7 +94,7 @@ router.patch(
 
 /**
  * @swagger
- * /users/me:
+ * /api/users/me:
  *   delete:
  *     summary: Delete current user account
  *     tags: [Users]

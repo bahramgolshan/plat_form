@@ -13,7 +13,7 @@ const swaggerOptions = {
       version: '1.0.0',
       description: 'RESTful API with JWT authentication',
     },
-    servers: [{ url: `${config.apiBaseUrl}/api` }],
+    servers: [{ url: `${config.apiBaseUrl}` }],
     components: {
       securitySchemes: {
         bearerAuth: {
@@ -25,7 +25,7 @@ const swaggerOptions = {
     },
     security: [{ bearerAuth: [] }],
   },
-  apis: [path.resolve(__dirname, '../routes/*.js')],
+  apis: [path.resolve(__dirname, '../routes/*.js'), path.resolve(__dirname, '../routes/api/*.js')],
 }
 
 export const swaggerSpec = swaggerJsdoc(swaggerOptions)

@@ -7,6 +7,10 @@ export default (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
+      user_id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
       token: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -23,6 +27,13 @@ export default (sequelize, DataTypes) => {
       updatedAt: 'updated_at',
     }
   )
+
+  RefreshToken.associate = (models) => {
+    RefreshToken.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      as: 'user',
+    })
+  }
 
   return RefreshToken
 }

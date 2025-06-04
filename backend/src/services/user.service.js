@@ -1,14 +1,19 @@
 import bcrypt from 'bcrypt'
 import httpStatus from 'http-status'
-import db from '../models/index.js'
+import { db } from '../models/index.js'
 import ApiError from '../utils/ApiError.js'
 
 const { User } = db
 
 const getUserById = async (id) => {
-  return await User.findByPk(id, {
+  const user = await User.findByPk(id, {
     attributes: { exclude: ['password'] },
   })
+
+  const roles = await user.getRoles({ attributes: ['key', 'name'] })
+  console.log(roles)
+
+  return { user, roles }
 }
 
 const updateUserById = async (userId, updateBody) => {
@@ -26,20 +31,6 @@ const updateUserById = async (userId, updateBody) => {
   return user
 }
 
-const changePassword = async (userId, currentPassword, newPassword) => {
-  const user = await User.findByPk(userId)
-  if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'User not found')
-  }
-
-  if (!(await bcrypt.compare(currentPassword, user.password))) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Current password is incorrect')
-  }
-
-  user.password = await bcrypt.hash(newPassword, 10)
-  await user.save()
-}
-
 const deleteUserById = async (userId) => {
   const user = await User.findByPk(userId)
   if (!user) {
@@ -52,6 +43,5 @@ const deleteUserById = async (userId) => {
 export default {
   getUserById,
   updateUserById,
-  changePassword,
   deleteUserById,
 }

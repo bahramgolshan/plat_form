@@ -15,7 +15,6 @@ export const createPasswordResetTokensTable = async (sequelize) => {
     CREATE INDEX IF NOT EXISTS password_reset_tokens_token_idx ON password_reset_tokens(token);
     CREATE INDEX IF NOT EXISTS password_reset_tokens_user_id_idx ON password_reset_tokens(user_id);
   `
-
   try {
     await sequelize.query(query)
     console.log('Password reset tokens table created successfully.')

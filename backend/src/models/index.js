@@ -1,19 +1,43 @@
+import { Sequelize } from 'sequelize'
+import dbConfig from '../config/db.config.js'
+
 // Import models
-import { Sequelize, sequelize, db } from '../config/db.config.js'
-import User from './user.model.js'
-import RefreshToken from './refreshToken.model.js'
-import PasswordResetToken from './passwordResetToken.model.js'
+import UserModel from './user.model.js'
+import RoleModel from './role.model.js'
+import UserRoleModel from './user-role.model.js'
+import RefreshTokenModel from './refresh-token.model.js'
+import PasswordResetTokenModel from './password-reset-token.model.js'
+import CustomerProfileModel from './customer-profile.model.js'
+import SupplierProfileModel from './supplier-profile.model.js'
+import EmployeeProfileModel from './employee-profile.model.js'
+
+// Initialize Sequelize instance
+const sequelize = new Sequelize(
+  dbConfig.database,
+  dbConfig.username,
+  dbConfig.password,
+  dbConfig.options
+)
+
+// Prepare db object
+const db = {
+  Sequelize,
+  sequelize,
+}
 
 // Register models
-db.User = User(sequelize, Sequelize)
-db.RefreshToken = RefreshToken(sequelize, Sequelize)
-db.PasswordResetToken = PasswordResetToken(sequelize, Sequelize)
+db.User = UserModel(sequelize, Sequelize)
+db.Role = RoleModel(sequelize, Sequelize)
+db.UserRole = UserRoleModel(sequelize, Sequelize)
+db.RefreshToken = RefreshTokenModel(sequelize, Sequelize)
+db.PasswordResetToken = PasswordResetTokenModel(sequelize, Sequelize)
+db.CustomerProfile = CustomerProfileModel(sequelize, Sequelize)
+db.SupplierProfile = SupplierProfileModel(sequelize, Sequelize)
+db.EmployeeProfile = EmployeeProfileModel(sequelize, Sequelize)
 
 // Setup associations
-db.User.hasMany(db.RefreshToken, { foreignKey: 'user_id', as: 'refreshTokens' })
-db.RefreshToken.belongsTo(db.User, { foreignKey: 'user_id', as: 'user' })
+Object.values(db).forEach((model) => {
+  if (model.associate) model.associate(db)
+})
 
-db.User.hasMany(db.PasswordResetToken, { foreignKey: 'user_id', as: 'passwordResetTokens' })
-db.PasswordResetToken.belongsTo(db.User, { foreignKey: 'user_id', as: 'user' })
-
-export default db
+export { db, sequelize, Sequelize }

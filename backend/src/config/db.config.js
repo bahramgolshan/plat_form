@@ -1,9 +1,5 @@
-import { Sequelize } from 'sequelize'
-import dotenv from 'dotenv'
 import logger from '../utils/logger.js'
 import { config } from './index.js'
-
-dotenv.config()
 
 // DB credentials and Sequelize options
 const dbConfig = {
@@ -33,18 +29,4 @@ const dbConfig = {
   },
 }
 
-// Initialize Sequelize instance
-const sequelize = new Sequelize(
-  dbConfig.database,
-  dbConfig.username,
-  dbConfig.password,
-  dbConfig.options
-)
-
-// Prepare db object
-const db = {
-  Sequelize,
-  sequelize,
-}
-
-export { db, Sequelize, sequelize }
+export default dbConfig

@@ -1,20 +1,13 @@
 import express from 'express'
-import { validate } from '../middleware/validate.middleware.js'
-import authValidation from '../validations/auth.validation.js'
-import authController from '../controllers/auth.controller.js'
+import { validate } from '../../middleware/validate.middleware.js'
+import authValidation from '../../validations/auth.validation.js'
+import authController from '../../controllers/auth.controller.js'
 
 const router = express.Router()
 
 /**
  * @swagger
- * tags:
- *   name: Auth
- *   description: Authentication endpoints
- */
-
-/**
- * @swagger
- * /auth/register:
+ * /api/auth/register:
  *   post:
  *     summary: Register a new user
  *     tags: [Auth]
@@ -41,10 +34,6 @@ const router = express.Router()
  *                 type: string
  *                 format: password
  *                 minLength: 8
- *               role:
- *                 type: string
- *                 enum: [customer, supplier, admin]
- *                 default: customer
  *     responses:
  *       201:
  *         description: User registered successfully
@@ -55,7 +44,7 @@ router.post('/register', validate(authValidation.register), authController.regis
 
 /**
  * @swagger
- * /auth/login:
+ * /api/auth/login:
  *   post:
  *     summary: Login with email and password
  *     tags: [Auth]
@@ -86,7 +75,7 @@ router.post('/login', validate(authValidation.login), authController.login)
 
 /**
  * @swagger
- * /auth/refresh-tokens:
+ * /api/auth/refresh-tokens:
  *   post:
  *     summary: Refresh auth tokens
  *     tags: [Auth]
@@ -111,7 +100,7 @@ router.post('/refresh-tokens', validate(authValidation.refreshTokens), authContr
 
 /**
  * @swagger
- * /auth/logout:
+ * /api/auth/logout:
  *   post:
  *     summary: Logout
  *     tags: [Auth]
@@ -136,7 +125,7 @@ router.post('/logout', validate(authValidation.logout), authController.logout)
 
 /**
  * @swagger
- * /auth/forgot-password:
+ * /api/auth/forgot-password:
  *   post:
  *     summary: Request password reset
  *     tags: [Auth]
@@ -166,7 +155,7 @@ router.post(
 
 /**
  * @swagger
- * /auth/reset-password:
+ * /api/auth/reset-password:
  *   post:
  *     summary: Reset password
  *     tags: [Auth]
@@ -196,7 +185,7 @@ router.post('/reset-password', validate(authValidation.resetPassword), authContr
 
 /**
  * @swagger
- * /auth/verify-email:
+ * /api/auth/verify-email:
  *   get:
  *     summary: Verify email
  *     tags: [Auth]

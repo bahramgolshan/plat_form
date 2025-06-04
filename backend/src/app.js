@@ -3,21 +3,19 @@ import { errorConverter, errorHandler } from './middleware/error.middleware.js'
 import { swaggerSpec } from './config/swagger.config.js'
 import ApiError from './utils/ApiError.js'
 import applyMiddleware from './middleware/index.js'
-import dotenv from 'dotenv'
 import express from 'express'
 import httpStatus from 'http-status'
-import routes from './routes/index.js'
+import router from './routes/index.js' // Import the main router
 import swaggerUi from 'swagger-ui-express'
 
-dotenv.config()
 
 const app = express()
 
 // Middlewares
 applyMiddleware(app)
 
-// API routes
-app.use('/api', routes)
+// Use the routes from index.js (including root and health routes)
+app.use(router)
 
 // API documentation
 if (config.environment !== 'production') {

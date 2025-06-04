@@ -1,12 +1,14 @@
 import express from 'express'
 import httpStatus from 'http-status'
-import authRoutes from './auth.routes.js'
-import adminRoutes from './admin.routes.js'
-import userRoutes from './user.routes.js'
+import routes from './api/index.js'
+import { config } from '../config/index.js'
 
 const router = express.Router()
 
-// Health check endpoint
+// Root route
+router.get('/', (req, res) => {
+  res.api(httpStatus.OK, `API is running in ${config.environment} mode!`)
+})
 
 /**
  * @swagger
@@ -20,11 +22,11 @@ const router = express.Router()
  *       400:
  *         description: Not Found
  */
-router.get('/health', (req, res) => res.api(httpStatus.OK, 'Breathing...'))
+router.get('/health', (req, res) => {
+  res.api(httpStatus.OK, 'healthy')
+})
 
 // API routes
-router.use('/auth', authRoutes)
-router.use('/admin', adminRoutes)
-router.use('/users', userRoutes)
+router.use('/api', routes)
 
 export default router

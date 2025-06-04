@@ -1,5 +1,6 @@
 import httpStatus from 'http-status'
 import userService from '../services/user.service.js'
+import authService from '../services/auth.service.js'
 
 const getProfile = async (req, res, next) => {
   try {
@@ -24,7 +25,7 @@ const updateProfile = async (req, res, next) => {
 const changePassword = async (req, res, next) => {
   try {
     const { currentPassword, newPassword } = req.body
-    await userService.changePassword(req.user.id, currentPassword, newPassword)
+    await authService.changePassword(req.user.id, currentPassword, newPassword)
 
     res.api(httpStatus.NO_CONTENT, 'Password changed successfully')
   } catch (error) {

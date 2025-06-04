@@ -1,5 +1,5 @@
 import app from './src/app.js'
-import db from './src/models/index.js'
+import { sequelize } from './src/models/index.js'
 import redisClient from './src/config/redis.config.js'
 import logger from './src/utils/logger.js'
 import { config } from './src/config/index.js'
@@ -10,7 +10,7 @@ let server
 const startServer = async () => {
   try {
     // Test external connections in parallel
-    await Promise.all([db.sequelize.authenticate(), redisClient.ping()])
+    await Promise.all([sequelize.authenticate(), redisClient.ping()])
 
     logger.info('Database connection established successfully.')
     logger.info('Redis connection established successfully.')
