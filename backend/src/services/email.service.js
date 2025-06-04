@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 const sendEmail = async (mailOptions) => {
   try {
     const info = await transporter.sendMail({
-      from: `"${config.emailFrom_NAME || 'No Reply'}" <${config.emailFrom}>`,
+      from: `"${config.emailFromName || 'No Reply'}" <${config.emailFrom}>`,
       ...mailOptions,
     })
 
