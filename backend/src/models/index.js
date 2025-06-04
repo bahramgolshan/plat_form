@@ -1,5 +1,5 @@
 // Import models
-import { Sequelize, sequelize, db } from '../config/db.js'
+import { Sequelize, sequelize, db } from '../config/db.config.js'
 import User from './user.model.js'
 import RefreshToken from './refreshToken.model.js'
 import PasswordResetToken from './passwordResetToken.model.js'

@@ -17,7 +17,7 @@ export const authenticate = async (req, res, next) => {
       throw new ApiError(401, 'Token revoked')
     }
 
-    const payload = jwt.verify(token, process.env.JWT_SECRET)
+    const payload = jwt.verify(token, config.port.jwtSecret)
     if (payload.type !== 'access') {
       throw new ApiError(401, 'Invalid token type')
     }
@@ -47,4 +47,3 @@ export const authorize = (roles = []) => {
     next()
   }
 }
-

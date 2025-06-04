@@ -14,7 +14,7 @@ dotenv.config()
 
 const { User, RefreshToken, PasswordResetToken } = db
 
-const generateToken = (userId, expires, type, secret = process.env.JWT_SECRET) => {
+const generateToken = (userId, expires, type, secret = config.port.jwtSecret) => {
   const payload = {
     sub: userId,
     iat: Math.floor(Date.now() / 1000),
@@ -34,11 +34,11 @@ const saveRefreshToken = async (token, userId, expires) => {
 
 const generateAuthTokens = async (user) => {
   const accessTokenExpires =
-    Math.floor(Date.now() / 1000) + parseInt(process.env.JWT_ACCESS_EXPIRATION_MINUTES) * 60
+    Math.floor(Date.now() / 1000) + parseInt(config.port.jwtAccessExpirationMinutes) * 60
   const accessToken = generateToken(user.id, accessTokenExpires, 'access')
 
   const refreshTokenExpires =
-    Math.floor(Date.now() / 1000) + parseInt(process.env.JWT_REFRESH_EXPIRATION_DAYS) * 24 * 60 * 60
+    Math.floor(Date.now() / 1000) + parseInt(config.port.jwtRefreshExpirationDays) * 24 * 60 * 60
   const refreshToken = generateToken(user.id, refreshTokenExpires, 'refresh')
   await saveRefreshToken(refreshToken, user.id, refreshTokenExpires)
 
@@ -92,7 +92,7 @@ const loginWithEmailAndPassword = async (email, password) => {
 
 const refreshAuthToken = async (refreshToken) => {
   try {
-    const payload = jwt.verify(refreshToken, process.env.JWT_SECRET)
+    const payload = jwt.verify(refreshToken, config.port.jwtSecret)
     if (payload.type !== 'refresh') {
       throw new Error('Invalid token type')
     }
@@ -186,20 +186,20 @@ const sendPasswordResetEmail = async (email) => {
     expires_at: expiresAt,
   })
 
-  const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`
+  const resetUrl = `${config.port.frontendUrl}/reset-password?token=${token}`
 
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
+    host: config.port.smtpHost,
+    port: config.port.smtpPort,
     secure: false,
     auth: {
-      user: process.env.SMTP_USERNAME,
-      pass: process.env.SMTP_PASSWORD,
+      user: config.port.smtpUsername,
+      pass: config.port.smtpPassword,
     },
   })
 
   await transporter.sendMail({
-    from: process.env.EMAIL_FROM,
+    from: config.port.emailFrom,
     to: user.email,
     subject: 'Password Reset',
     html: `
@@ -215,7 +215,7 @@ const sendPasswordResetEmail = async (email) => {
 const sendVerificationEmail = async (user) => {
   // console.log('here', user)
   const verificationToken = user.verificationToken
-  const verificationUrl = `${process.env.API_BASE_URL}/api/auth/verify-email?token=${verificationToken}`
+  const verificationUrl = `${config.apiBaseUrl}/api/auth/verify-email?token=${verificationToken}`
 
   const emailText = `Please verify your email by clicking on this link: ${verificationUrl}`
   const emailHtml = `<p>Please verify your email by clicking on this link: <a href="${verificationUrl}">Verify Email</a></p>`

@@ -1,20 +1,21 @@
 import nodemailer from 'nodemailer'
 import logger from '../utils/logger.js'
+import { config } from '../config/index.js'
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: process.env.SMTP_PORT === '465', // true for 465, false for other ports
+  host: config.port.smtpHost,
+  port: config.port.smtpPort,
+  secure: config.port.smtpPort === '465', // true for 465, false for other ports
   auth: {
-    user: process.env.SMTP_USERNAME,
-    pass: process.env.SMTP_PASSWORD,
+    user: config.port.smtpUsername,
+    pass: config.port.smtpPassword,
   },
 })
 
 const sendEmail = async (mailOptions) => {
   try {
     const info = await transporter.sendMail({
-      from: `"${process.env.EMAIL_FROM_NAME || 'No Reply'}" <${process.env.EMAIL_FROM}>`,
+      from: `"${config.port.emailFrom_NAME || 'No Reply'}" <${config.port.emailFrom}>`,
       ...mailOptions,
     })
 

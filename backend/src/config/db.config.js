@@ -1,19 +1,20 @@
 import { Sequelize } from 'sequelize'
 import dotenv from 'dotenv'
 import logger from '../utils/logger.js'
+import { config } from './index.js'
 
 dotenv.config()
 
 // DB credentials and Sequelize options
 const dbConfig = {
-  database: process.env.DB_DATABASE,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  database: config.dbDatabase,
+  username: config.dbUser,
+  password: config.dbPassword,
   options: {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+    host: config.dbHost,
+    port: config.dbPort,
     dialect: 'postgres',
-    logging: process.env.NODE_ENV === 'development' ? (msg) => logger.debug(msg) : false,
+    logging: config.environment === 'development' ? (msg) => logger.debug(msg) : false,
     pool: {
       max: 5,
       min: 0,
@@ -22,7 +23,7 @@ const dbConfig = {
     },
     dialectOptions: {
       ssl:
-        process.env.DB_SSL === 'true'
+        config.dbSsl === 'true'
           ? {
               require: true,
               rejectUnauthorized: false,

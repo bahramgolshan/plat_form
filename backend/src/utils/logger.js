@@ -1,9 +1,7 @@
 import winston from 'winston'
-import dotenv from 'dotenv'
+import { config } from '../config/index.js'
 
-dotenv.config()
-
-const isProduction = process.env.NODE_ENV === 'production'
+const isProduction = config.environment === 'production'
 
 const transports = [
   new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),

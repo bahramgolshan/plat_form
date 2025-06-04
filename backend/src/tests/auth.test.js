@@ -1,6 +1,6 @@
 import request from 'supertest'
-import app from '../src/app.js'
-import db from '../src/models/index.js'
+import app from '../app.js'
+import db from '../models/index.js'
 import { v4 as uuidv4 } from 'uuid'
 
 const { User, RefreshToken } = db

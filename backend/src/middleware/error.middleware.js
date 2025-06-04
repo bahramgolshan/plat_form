@@ -3,7 +3,6 @@ import ApiError from '../utils/ApiError.js'
 import logger from '../utils/logger.js'
 
 export const errorConverter = (err, req, res, next) => {
-  console.log("errorConverter Callen \n")
   let error = err
   if (!(error instanceof ApiError)) {
     const statusCode = error.statusCode || httpStatus.INTERNAL_SERVER_ERROR
@@ -14,10 +13,9 @@ export const errorConverter = (err, req, res, next) => {
 }
 
 export const errorHandler = (err, req, res, next) => {
-  console.log("errorHandler Callen \n")
   const { statusCode, message } = err
 
-  if (process.env.NODE_ENV === 'production' && !err.isOperational) {
+  if (config.environment === 'production' && !err.isOperational) {
     statusCode = httpStatus.INTERNAL_SERVER_ERROR
     message = err.message
   }
@@ -27,10 +25,10 @@ export const errorHandler = (err, req, res, next) => {
   const response = {
     code: statusCode,
     message,
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
+    ...(config.environment === 'development' && { stack: err.stack }),
   }
 
-  if (process.env.NODE_ENV === 'development') {
+  if (config.environment === 'development') {
     logger.error(err)
   }
 
