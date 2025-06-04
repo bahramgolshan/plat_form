@@ -169,11 +169,9 @@ For production deployment, consider:
 
 ---
 
-
 ## Folder Structure
 
-## Folder Structure
-
+```
 plat_form/
 ├── backend/
 │   ├── logs/
@@ -236,7 +234,7 @@ plat_form/
 │   ├── pnpm-workspace.yaml  
 │   └── README.md  
 └── frontend/
-
+```
 
 ---
 
