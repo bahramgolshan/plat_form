@@ -17,7 +17,7 @@ export default {
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      deletedAt: DataTypes.DATE,
+      deleted_at: DataTypes.DATE,
     })
 
     await queryInterface.addIndex('tags', ['name'], {

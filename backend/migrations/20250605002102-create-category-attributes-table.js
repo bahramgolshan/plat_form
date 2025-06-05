@@ -29,13 +29,17 @@ export default {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      sort_order: DataTypes.INTEGER,
+      sort_order: {
+        type: DataTypes.INTEGER,
+      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      deletedAt: DataTypes.DATE,
+      deleted_at: {
+        type: DataTypes.DATE,
+      },
     })
 
     await queryInterface.addIndex('category_attributes', ['category_id', 'attribute_name'], {

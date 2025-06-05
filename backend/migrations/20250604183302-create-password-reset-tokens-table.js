@@ -22,7 +22,7 @@ export async function up(queryInterface, Sequelize) {
       type: Sequelize.DATE,
       allowNull: false,
     },
-    used: {
+    is_used: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,

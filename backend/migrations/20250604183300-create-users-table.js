@@ -26,18 +26,15 @@ export async function up(queryInterface, Sequelize) {
       type: Sequelize.STRING(255),
       allowNull: true, // Allow null for social login users
     },
-    isEmailVerified: {
+    is_email_verified: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
-      field: 'is_email_verified',
     },
-    verificationToken: {
+    verification_token: {
       type: Sequelize.STRING,
-      field: 'verification_token',
     },
-    lastLoginAt: {
+    last_login_at: {
       type: Sequelize.DATE,
-      field: 'last_login_at',
     },
     created_at: {
       type: Sequelize.DATE,

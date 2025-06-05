@@ -25,13 +25,19 @@ export default {
         unique: true,
         allowNull: false,
       },
-      description: DataTypes.TEXT,
-      icon: DataTypes.STRING(255),
+      description: {
+        type: DataTypes.TEXT,
+      },
+      icon: {
+        type: DataTypes.STRING(255),
+      },
       is_active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-      metadata: DataTypes.JSONB,
+      metadata: {
+        type: DataTypes.JSONB,
+      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -42,7 +48,9 @@ export default {
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      deletedAt: DataTypes.DATE,
+      deleted_at: {
+        type: DataTypes.DATE,
+      },
     })
 
     await queryInterface.addIndex('categories', ['parent_category_id'])
