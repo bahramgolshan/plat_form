@@ -1,6 +1,6 @@
 import express from 'express'
-import { authenticate } from '../../middleware/auth.middleware.js'
-import { validate } from '../../middleware/validate.middleware.js'
+import { authenticate } from '../../middlewares/auth.middleware.js'
+import { validate } from '../../middlewares/validate.middleware.js'
 import userValidation from '../../validations/user.validation.js'
 import userController from '../../controllers/user.controller.js'
 

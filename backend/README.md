@@ -175,64 +175,64 @@ For production deployment, consider:
 plat_form/
 ├── backend/
 │   ├── logs/
-│   │   ├── combined.log  
-│   │   ├── error.log  
+│   │   ├── combined.log
+│   │   ├── error.log
 │   ├── migrations/
-│   │   ├── 001-create-users-table.js  
-│   │   ├── 002-create-refresh-tokens-table.js  
-│   │   ├── 003-create-password-reset-tokens-table.js  
-│   │   ├── migrate.js  
+│   │   ├── 001-create-users-table.js
+│   │   ├── 002-create-refresh-tokens-table.js
+│   │   ├── 003-create-password-reset-tokens-table.js
+│   │   ├── migrate.js
 │   ├── node_modules/
 │   ├── src/
 │   │   ├── config/
-│   │   │   ├── db.config.js  
-│   │   │   ├── index.js  
-│   │   │   ├── redis.config.js  
-│   │   │   ├── swagger.config.js  
+│   │   │   ├── db.config.js
+│   │   │   ├── index.js
+│   │   │   ├── redis.config.js
+│   │   │   ├── swagger.config.js
 │   │   ├── controllers/
-│   │   │   ├── auth.controller.js  
-│   │   │   ├── user.controller.js  
-│   │   ├── middleware/
-│   │   │   ├── auth.middleware.js  
-│   │   │   ├── error.middleware.js  
-│   │   │   ├── index.js  
-│   │   │   ├── rateLimiter.middleware.js  
-│   │   │   ├── responseEnhancer.middleware.js  
-│   │   │   ├── validate.middleware.js  
+│   │   │   ├── auth.controller.js
+│   │   │   ├── user.controller.js
+│   │   ├── middlewares/
+│   │   │   ├── auth.middleware.js
+│   │   │   ├── error.middleware.js
+│   │   │   ├── index.js
+│   │   │   ├── rateLimiter.middleware.js
+│   │   │   ├── responseEnhancer.middleware.js
+│   │   │   ├── validate.middleware.js
 │   │   ├── models/
-│   │   │   ├── index.js  
-│   │   │   ├── passwordResetToken.model.js  
-│   │   │   ├── refreshToken.model.js  
-│   │   │   ├── user.model.js  
+│   │   │   ├── index.js
+│   │   │   ├── passwordResetToken.model.js
+│   │   │   ├── refreshToken.model.js
+│   │   │   ├── user.model.js
 │   │   ├── routes/
-│   │   │   ├── admin.routes.js  
-│   │   │   ├── auth.routes.js  
-│   │   │   ├── index.js  
-│   │   │   ├── user.routes.js  
+│   │   │   ├── admin.routes.js
+│   │   │   ├── auth.routes.js
+│   │   │   ├── index.js
+│   │   │   ├── user.routes.js
 │   │   ├── services/
-│   │   │   ├── auth.service.js  
-│   │   │   ├── email.service.js  
-│   │   │   ├── redis.service.js  
-│   │   │   ├── user.service.js  
+│   │   │   ├── auth.service.js
+│   │   │   ├── email.service.js
+│   │   │   ├── redis.service.js
+│   │   │   ├── user.service.js
 │   │   ├── utils/
-│   │   │   ├── ApiError.js  
-│   │   │   ├── ApiResponse.js  
-│   │   │   ├── logger.js  
+│   │   │   ├── ApiError.js
+│   │   │   ├── ApiResponse.js
+│   │   │   ├── logger.js
 │   │   ├── validations/
-│   │   │   ├── auth.validation.js  
-│   │   │   ├── user.validation.js  
-│   │   ├── app.js  
-│   ├── server.js  
+│   │   │   ├── auth.validation.js
+│   │   │   ├── user.validation.js
+│   │   ├── app.js
+│   ├── server.js
 │   ├── tests/
-│   ├── .env  
-│   ├── .env.example  
-│   ├── .eslintrc.json  
-│   ├── .gitignore  
-│   ├── .prettierrc  
-│   ├── package.json  
-│   ├── pnpm-lock.yaml  
-│   ├── pnpm-workspace.yaml  
-│   └── README.md  
+│   ├── .env
+│   ├── .env.example
+│   ├── .eslintrc.json
+│   ├── .gitignore
+│   ├── .prettierrc
+│   ├── package.json
+│   ├── pnpm-lock.yaml
+│   ├── pnpm-workspace.yaml
+│   └── README.md
 └── frontend/
 ```
 

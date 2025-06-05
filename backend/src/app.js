@@ -1,13 +1,12 @@
 import { config } from './config/index.js'
-import { errorConverter, errorHandler } from './middleware/error.middleware.js'
+import { errorConverter, errorHandler } from './middlewares/error.middleware.js'
 import { swaggerSpec } from './config/swagger.config.js'
 import ApiError from './utils/ApiError.js'
-import applyMiddleware from './middleware/index.js'
+import applyMiddleware from './middlewares/index.js'
 import express from 'express'
 import httpStatus from 'http-status'
 import router from './routes/index.js' // Import the main router
 import swaggerUi from 'swagger-ui-express'
-
 
 const app = express()
 
