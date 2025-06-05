@@ -10,7 +10,7 @@ export default {
       'locations',
       [
         {
-          location_id: northAmericaId,
+          id: northAmericaId,
           parent_id: null,
           name: 'North America',
           type: 'continent',
@@ -21,7 +21,7 @@ export default {
           updated_at: new Date(),
         },
         {
-          location_id: europeId,
+          id: europeId,
           parent_id: null,
           name: 'Europe',
           type: 'continent',
@@ -45,7 +45,7 @@ export default {
       'locations',
       [
         {
-          location_id: usaId,
+          id: usaId,
           parent_id: northAmericaId,
           name: 'United States',
           type: 'country',
@@ -56,7 +56,7 @@ export default {
           updated_at: new Date(),
         },
         {
-          location_id: spainId,
+          id: spainId,
           parent_id: europeId,
           name: 'Spain',
           type: 'country',
@@ -80,7 +80,7 @@ export default {
       'locations',
       [
         {
-          location_id: nycId,
+          id: nycId,
           parent_id: usaId,
           name: 'New York City',
           type: 'city',
@@ -91,7 +91,7 @@ export default {
           updated_at: new Date(),
         },
         {
-          location_id: barcelonaId,
+          id: barcelonaId,
           parent_id: spainId,
           name: 'Barcelona',
           type: 'city',
@@ -112,7 +112,7 @@ export default {
       'locations',
       [
         {
-          location_id: uuidv4(),
+          id: uuidv4(),
           parent_id: nycId,
           name: 'Times Square',
           type: 'poi',
@@ -123,7 +123,7 @@ export default {
           updated_at: new Date(),
         },
         {
-          location_id: uuidv4(),
+          id: uuidv4(),
           parent_id: barcelonaId,
           name: 'Sagrada Familia',
           type: 'poi',

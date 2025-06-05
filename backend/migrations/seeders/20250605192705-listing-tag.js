@@ -4,10 +4,10 @@ export default {
   async up(queryInterface, Sequelize) {
     // Get listings and tags
     const [listings] = await queryInterface.sequelize.query(
-      'SELECT listing_id, title FROM listings;'
+      'SELECT id, title FROM listings;'
     )
 
-    const [tags] = await queryInterface.sequelize.query('SELECT tag_id, name FROM tags;')
+    const [tags] = await queryInterface.sequelize.query('SELECT id, name FROM tags;')
 
     // Create tag associations
     const listingTags = []
@@ -33,8 +33,8 @@ export default {
       // Add relevant tags first
       relevantTags.slice(0, 1).forEach((tag) => {
         listingTags.push({
-          listing_id: listing.listing_id,
-          tag_id: tag.tag_id,
+          tag_id: tag.id,
+          listing_id: listing.id,
           created_at: new Date(),
         })
       })
@@ -42,10 +42,10 @@ export default {
       // Add remaining random tags
       const remainingTags = tagCount - relevantTags.length
       shuffledTags.slice(0, remainingTags).forEach((tag) => {
-        if (!relevantTags.some((t) => t.tag_id === tag.tag_id)) {
+        if (!relevantTags.some((t) => t.id === tag.id)) {
           listingTags.push({
-            listing_id: listing.listing_id,
-            tag_id: tag.tag_id,
+            listing_id: listing.id,
+            tag_id: tag.id,
             created_at: new Date(),
           })
         }

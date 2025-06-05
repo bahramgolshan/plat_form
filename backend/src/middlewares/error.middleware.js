@@ -1,6 +1,6 @@
 import httpStatus from 'http-status'
-import ApiError from '../utils/ApiError.js'
-import logger from '../utils/logger.js'
+import ApiError from '../utils/api-error.util.js'
+import logger from '../utils/logger.util.js'
 import { config } from '../config/index.js'
 
 export const errorConverter = (err, req, res, next) => {

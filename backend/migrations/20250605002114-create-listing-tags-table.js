@@ -8,7 +8,7 @@ export default {
         allowNull: false,
         references: {
           model: 'listings',
-          key: 'listing_id',
+          key: 'id',
         },
         onDelete: 'CASCADE',
       },
@@ -17,7 +17,7 @@ export default {
         allowNull: false,
         references: {
           model: 'tags',
-          key: 'tag_id',
+          key: 'id',
         },
         onDelete: 'CASCADE',
       },

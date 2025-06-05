@@ -13,7 +13,7 @@ export default {
         allowNull: false,
         references: {
           model: 'listings',
-          key: 'listing_id',
+          key: 'id',
         },
         onDelete: 'CASCADE',
       },

@@ -4,11 +4,11 @@ export default {
   async up(queryInterface, Sequelize) {
     // Get listings and locations
     const [listings] = await queryInterface.sequelize.query(
-      'SELECT listing_id, title FROM listings;'
+      'SELECT id, title FROM listings;'
     )
 
     const [locations] = await queryInterface.sequelize.query(
-      'SELECT location_id, name, type FROM locations;'
+      'SELECT id, name, type FROM locations;'
     )
 
     // Create location associations
@@ -28,9 +28,9 @@ export default {
 
         for (let i = 0; i < Math.min(locationCount, nycLocations.length); i++) {
           listingLocations.push({
-            listing_location_id: uuidv4(),
-            listing_id: listing.listing_id,
-            location_id: nycLocations[i].location_id,
+            id: uuidv4(),
+            listing_id: listing.id,
+            location_id: nycLocations[i].id,
             stop_order: i + 1,
             label: nycLocations[i].type === 'poi' ? 'Meeting Point' : 'Main Location',
             created_at: new Date(),
@@ -43,9 +43,9 @@ export default {
 
         for (let i = 0; i < Math.min(locationCount, bcnLocations.length); i++) {
           listingLocations.push({
-            listing_location_id: uuidv4(),
-            listing_id: listing.listing_id,
-            location_id: bcnLocations[i].location_id,
+            id: uuidv4(),
+            listing_id: listing.id,
+            location_id: bcnLocations[i].id,
             stop_order: i + 1,
             label: bcnLocations[i].type === 'poi' ? 'Meeting Point' : 'Main Location',
             created_at: new Date(),
@@ -54,9 +54,9 @@ export default {
       } else {
         // Default to first location
         listingLocations.push({
-          listing_location_id: uuidv4(),
-          listing_id: listing.listing_id,
-          location_id: locations[0].location_id,
+          id: uuidv4(),
+          listing_id: listing.id,
+          location_id: locations[0].id,
           stop_order: 1,
           label: 'Main Location',
           created_at: new Date(),

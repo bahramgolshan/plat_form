@@ -4,7 +4,7 @@ export default {
   async up(queryInterface, Sequelize) {
     // Get listings
     const [listings] = await queryInterface.sequelize.query(
-      'SELECT listing_id, title, description FROM listings;'
+      'SELECT id, title, description FROM listings;'
     )
 
     // Create translations for each listing
@@ -13,8 +13,8 @@ export default {
     listings.forEach((listing) => {
       // English (same as original)
       listingTranslations.push({
-        translation_id: uuidv4(),
-        listing_id: listing.listing_id,
+        id: uuidv4(),
+        listing_id: listing.id,
         language_code: 'en',
         title: listing.title,
         description: listing.description,
@@ -41,8 +41,8 @@ export default {
       }
 
       listingTranslations.push({
-        translation_id: uuidv4(),
-        listing_id: listing.listing_id,
+        id: uuidv4(),
+        listing_id: listing.id,
         language_code: 'es',
         title: spanishTitle,
         description: spanishDescription || listing.description,

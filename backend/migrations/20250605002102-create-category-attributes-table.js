@@ -13,7 +13,7 @@ export default {
         allowNull: false,
         references: {
           model: 'categories',
-          key: 'category_id',
+          key: 'id',
         },
         onDelete: 'CASCADE',
       },
@@ -42,7 +42,7 @@ export default {
       },
     })
 
-    await queryInterface.addIndex('category_attributes', ['category_id', 'attribute_name'], {
+    await queryInterface.addIndex('category_attributes', ['category_id', 'name'], {
       unique: true,
     })
   },

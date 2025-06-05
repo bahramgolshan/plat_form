@@ -1,7 +1,7 @@
 import { config } from './config/index.js'
 import { errorConverter, errorHandler } from './middlewares/error.middleware.js'
 import { swaggerSpec } from './config/swagger.config.js'
-import ApiError from './utils/ApiError.js'
+import ApiError from './utils/api-error.util.js'
 import applyMiddleware from './middlewares/index.js'
 import express from 'express'
 import httpStatus from 'http-status'

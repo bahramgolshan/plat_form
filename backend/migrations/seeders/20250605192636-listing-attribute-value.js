@@ -4,10 +4,10 @@ export default {
   async up(queryInterface, Sequelize) {
     // Get listings and attributes
     const [listings] = await queryInterface.sequelize.query(
-      'SELECT listing_id, category_id, title FROM listings;'
+      'SELECT id, category_id, title FROM listings;'
     )
     const [attributes] = await queryInterface.sequelize.query(
-      'SELECT attribute_id, category_id, attribute_name FROM category_attributes;'
+      'SELECT id, category_id, name FROM category_attributes;'
     )
 
     // Create attribute values for each listing
@@ -21,7 +21,7 @@ export default {
       listingCategory.forEach((attr) => {
         let value
 
-        switch (attr.attribute_name) {
+        switch (attr.name) {
           case 'Duration':
             value = listing.title.includes('Tour')
               ? '3 hours'
@@ -62,10 +62,10 @@ export default {
         }
 
         attributeValues.push({
-          value_id: uuidv4(),
-          listing_id: listing.listing_id,
-          attribute_id: attr.attribute_id,
-          attribute_value: value,
+          id: uuidv4(),
+          listing_id: listing.id,
+          category_attribute_id: attr.id,
+          value: value,
           created_at: new Date(),
         })
       })

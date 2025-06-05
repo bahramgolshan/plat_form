@@ -1,5 +1,5 @@
 import httpStatus from 'http-status'
-import ApiError from '../utils/ApiError.js'
+import ApiError from '../utils/api-error.util.js'
 
 export const validate = (schema) => (req, res, next) => {
   const { error, value } = schema.validate(req.body, {
@@ -15,4 +15,3 @@ export const validate = (schema) => (req, res, next) => {
   req.body = value
   next()
 }
-

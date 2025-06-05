@@ -4,7 +4,7 @@ export default {
   async up(queryInterface, Sequelize) {
     // Get listings
     const [listings] = await queryInterface.sequelize.query(
-      'SELECT listing_id, title FROM listings;'
+      'SELECT id, title FROM listings;'
     )
 
     // Create schedules for each listing
@@ -25,8 +25,8 @@ export default {
       if (listing.title.includes('Rental')) {
         // Available all days
         listingSchedules.push({
-          schedule_id: uuidv4(),
-          listing_id: listing.listing_id,
+          id: uuidv4(),
+          listing_id: listing.id,
           day_of_week: daysOfWeek[0],
           start_time: '09:00:00',
           end_time: '18:00:00',
@@ -40,8 +40,8 @@ export default {
         if (isWeekendOnly) {
           // Weekend schedule
           listingSchedules.push({
-            schedule_id: uuidv4(),
-            listing_id: listing.listing_id,
+            id: uuidv4(),
+            listing_id: listing.id,
             day_of_week: daysOfWeek[5],
             start_time: '10:00:00',
             end_time: '16:00:00',
@@ -49,8 +49,8 @@ export default {
             created_at: new Date(),
           })
           listingSchedules.push({
-            schedule_id: uuidv4(),
-            listing_id: listing.listing_id,
+            id: uuidv4(),
+            listing_id: listing.id,
             day_of_week: daysOfWeek[6],
             start_time: '10:00:00',
             end_time: '16:00:00',
@@ -60,8 +60,8 @@ export default {
         } else {
           // Weekday schedule
           listingSchedules.push({
-            schedule_id: uuidv4(),
-            listing_id: listing.listing_id,
+            id: uuidv4(),
+            listing_id: listing.id,
             day_of_week: daysOfWeek[1],
             start_time: '10:00:00',
             end_time: '14:00:00',
@@ -69,8 +69,8 @@ export default {
             created_at: new Date(),
           })
           listingSchedules.push({
-            schedule_id: uuidv4(),
-            listing_id: listing.listing_id,
+            id: uuidv4(),
+            listing_id: listing.id,
             day_of_week: daysOfWeek[3],
             start_time: '10:00:00',
             end_time: '14:00:00',
@@ -78,8 +78,8 @@ export default {
             created_at: new Date(),
           })
           listingSchedules.push({
-            schedule_id: uuidv4(),
-            listing_id: listing.listing_id,
+            id: uuidv4(),
+            listing_id: listing.id,
             day_of_week: daysOfWeek[5],
             start_time: '09:00:00',
             end_time: '17:00:00',

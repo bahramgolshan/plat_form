@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import ApiError from '../utils/ApiError.js'
+import ApiError from '../utils/api-error.util.js'
 import authService from '../services/auth.service.js'
 import { db } from '../models/index.js'
 import { config } from '../config/index.js'
@@ -45,6 +45,22 @@ export const authorize = (roles = []) => {
       next(new ApiError(403, 'Forbidden'))
       return
     }
+    next()
+  }
+}
+
+export const checkIdempotency = (req, res, next) => {
+  if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
+    const idempotencyKey = req.headers['x-idempotency-key']
+    if (!idempotencyKey) {
+      return res.status(428).json({
+        success: false,
+        error: 'Idempotency key required',
+      })
+    }
+    // Check if key was already processed (implement your cache/db check here)
+    next()
+  } else {
     next()
   }
 }

@@ -6,7 +6,7 @@ export default {
       'categories',
       [
         {
-          category_id: uuidv4(),
+          id: uuidv4(),
           parent_id: null,
           name: 'Tours',
           slug: 'tours',
@@ -17,7 +17,7 @@ export default {
           updated_at: new Date(),
         },
         {
-          category_id: uuidv4(),
+          id: uuidv4(),
           parent_id: null,
           name: 'Activities',
           slug: 'activities',
@@ -28,7 +28,7 @@ export default {
           updated_at: new Date(),
         },
         {
-          category_id: uuidv4(),
+          id: uuidv4(),
           parent_id: null,
           name: 'Transportation',
           slug: 'transportation',

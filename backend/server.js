@@ -1,7 +1,7 @@
 import app from './src/app.js'
 import { sequelize } from './src/models/index.js'
 import redisClient from './src/config/redis.config.js'
-import logger from './src/utils/logger.js'
+import logger from './src/utils/logger.util.js'
 import { config } from './src/config/index.js'
 
 const port = config.port || 3000

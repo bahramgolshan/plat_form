@@ -1,4 +1,4 @@
-import logger from '../utils/logger.js'
+import logger from '../utils/logger.util.js'
 import { config } from './index.js'
 
 // DB credentials and Sequelize options

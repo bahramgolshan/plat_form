@@ -13,7 +13,7 @@ export default {
         allowNull: false,
         references: {
           model: 'listings',
-          key: 'listing_id',
+          key: 'id',
         },
         onDelete: 'CASCADE',
       },
@@ -22,7 +22,7 @@ export default {
         allowNull: false,
         references: {
           model: 'category_attributes',
-          key: 'attribute_id',
+          key: 'id',
         },
         onDelete: 'CASCADE',
       },
@@ -38,7 +38,7 @@ export default {
       deleted_at: DataTypes.DATE,
     })
 
-    await queryInterface.addIndex('listing_attribute_values', ['listing_id', 'attribute_id'], {
+    await queryInterface.addIndex('listing_attribute_values', ['listing_id', 'category_attribute_id'], {
       unique: true,
     })
   },

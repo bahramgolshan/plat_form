@@ -4,7 +4,7 @@ export default {
   async up(queryInterface, Sequelize) {
     // Get listings
     const [listings] = await queryInterface.sequelize.query(
-      'SELECT listing_id, title FROM listings;'
+      'SELECT id, title FROM listings;'
     )
 
     // Sample image URLs (using placeholder service)
@@ -24,8 +24,8 @@ export default {
 
       for (let i = 0; i < imageCount; i++) {
         listingImages.push({
-          image_id: uuidv4(),
-          listing_id: listing.listing_id,
+          id: uuidv4(),
+          listing_id: listing.id,
           image_url: `${sampleImages[i]}?${listing.title.replace(/\s+/g, '-')}-${i}`,
           caption: `${listing.title} - Photo ${i + 1}`,
           sort_order: i + 1,

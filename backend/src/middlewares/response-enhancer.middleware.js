@@ -1,4 +1,4 @@
-import ApiResponse from '../utils/ApiResponse.js'
+import ApiResponse from '../utils/api-response.util.js'
 
 /**
  * @typedef {import('express').Response} ExpressResponse

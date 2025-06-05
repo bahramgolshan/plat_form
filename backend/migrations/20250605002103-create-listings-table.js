@@ -17,7 +17,7 @@ export default {
         allowNull: false,
         references: {
           model: 'categories',
-          key: 'category_id',
+          key: 'id',
         },
         onDelete: 'RESTRICT',
       },

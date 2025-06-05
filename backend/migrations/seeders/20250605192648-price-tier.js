@@ -4,7 +4,7 @@ export default {
   async up(queryInterface, Sequelize) {
     // Get listings
     const [listings] = await queryInterface.sequelize.query(
-      'SELECT listing_id, title, base_price, currency FROM listings;'
+      'SELECT id, title, base_price, currency FROM listings;'
     )
 
     // Create price tiers for each listing
@@ -13,8 +13,8 @@ export default {
     listings.forEach((listing) => {
       // Default price tier
       priceTiers.push({
-        tier_id: uuidv4(),
-        listing_id: listing.listing_id,
+        id: uuidv4(),
+        listing_id: listing.id,
         label: 'Standard',
         amount: listing.base_price,
         currency: listing.currency,
@@ -25,8 +25,8 @@ export default {
       // Child price tier (if applicable)
       if (listing.title.includes('Tour') || listing.title.includes('Activity')) {
         priceTiers.push({
-          tier_id: uuidv4(),
-          listing_id: listing.listing_id,
+          id: uuidv4(),
+          listing_id: listing.id,
           label: 'Child (5-12)',
           min_age: 5,
           max_age: 12,
@@ -40,8 +40,8 @@ export default {
       // Senior price tier (if applicable)
       if (listing.title.includes('Tour')) {
         priceTiers.push({
-          tier_id: uuidv4(),
-          listing_id: listing.listing_id,
+          id: uuidv4(),
+          listing_id: listing.id,
           label: 'Senior (65+)',
           min_age: 65,
           amount: listing.base_price * 0.8, // 20% discount for seniors

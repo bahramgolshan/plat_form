@@ -4,7 +4,7 @@ export default {
   async up(queryInterface, Sequelize) {
     // Get listings
     const [listings] = await queryInterface.sequelize.query(
-      'SELECT listing_id, title FROM listings;'
+      'SELECT id, title FROM listings;'
     )
 
     // Create random exclusions
@@ -28,8 +28,8 @@ export default {
         date.setDate(today.getDate() + daysOffset)
 
         listingExclusions.push({
-          exclusion_id: uuidv4(),
-          listing_id: listing.listing_id,
+          id: uuidv4(),
+          listing_id: listing.id,
           exclusion_date: date,
           reason: reasons[Math.floor(Math.random() * reasons.length)],
           created_at: new Date(),
