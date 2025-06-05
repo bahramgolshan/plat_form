@@ -3,7 +3,7 @@ import { DataTypes } from 'sequelize'
 export default {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('listing_attribute_values', {
-      value_id: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -17,7 +17,7 @@ export default {
         },
         onDelete: 'CASCADE',
       },
-      attribute_id: {
+      category_attribute_id: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
@@ -26,7 +26,7 @@ export default {
         },
         onDelete: 'CASCADE',
       },
-      attribute_value: {
+      value: {
         type: DataTypes.TEXT,
         allowNull: false,
       },

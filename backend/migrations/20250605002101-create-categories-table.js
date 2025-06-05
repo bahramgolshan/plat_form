@@ -3,16 +3,16 @@ import { DataTypes } from 'sequelize'
 export default {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('categories', {
-      category_id: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      parent_category_id: {
+      parent_id: {
         type: DataTypes.UUID,
         references: {
           model: 'categories',
-          key: 'category_id',
+          key: 'id',
         },
         onDelete: 'SET NULL',
       },
@@ -53,7 +53,7 @@ export default {
       },
     })
 
-    await queryInterface.addIndex('categories', ['parent_category_id'])
+    await queryInterface.addIndex('categories', ['parent_id'])
   },
 
   async down(queryInterface) {

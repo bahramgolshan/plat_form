@@ -3,7 +3,7 @@ import { DataTypes } from 'sequelize'
 export default {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('listing_exclusions', {
-      exclusion_id: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,

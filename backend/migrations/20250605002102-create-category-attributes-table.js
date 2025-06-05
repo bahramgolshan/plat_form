@@ -3,7 +3,7 @@ import { DataTypes } from 'sequelize'
 export default {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('category_attributes', {
-      attribute_id: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -17,11 +17,11 @@ export default {
         },
         onDelete: 'CASCADE',
       },
-      attribute_name: {
+      name: {
         type: DataTypes.STRING(255),
         allowNull: false,
       },
-      attribute_type: {
+      type: {
         type: DataTypes.ENUM('string', 'number', 'date', 'boolean', 'select'),
         allowNull: false,
       },

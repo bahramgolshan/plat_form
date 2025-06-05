@@ -11,7 +11,7 @@ export default {
       [
         {
           location_id: northAmericaId,
-          parent_location_id: null,
+          parent_id: null,
           name: 'North America',
           type: 'continent',
           latitude: 47.1304,
@@ -22,7 +22,7 @@ export default {
         },
         {
           location_id: europeId,
-          parent_location_id: null,
+          parent_id: null,
           name: 'Europe',
           type: 'continent',
           latitude: 54.526,
@@ -46,7 +46,7 @@ export default {
       [
         {
           location_id: usaId,
-          parent_location_id: northAmericaId,
+          parent_id: northAmericaId,
           name: 'United States',
           type: 'country',
           latitude: 37.0902,
@@ -57,7 +57,7 @@ export default {
         },
         {
           location_id: spainId,
-          parent_location_id: europeId,
+          parent_id: europeId,
           name: 'Spain',
           type: 'country',
           latitude: 40.4637,
@@ -81,7 +81,7 @@ export default {
       [
         {
           location_id: nycId,
-          parent_location_id: usaId,
+          parent_id: usaId,
           name: 'New York City',
           type: 'city',
           latitude: 40.7128,
@@ -92,7 +92,7 @@ export default {
         },
         {
           location_id: barcelonaId,
-          parent_location_id: spainId,
+          parent_id: spainId,
           name: 'Barcelona',
           type: 'city',
           latitude: 41.3851,
@@ -113,7 +113,7 @@ export default {
       [
         {
           location_id: uuidv4(),
-          parent_location_id: nycId,
+          parent_id: nycId,
           name: 'Times Square',
           type: 'poi',
           latitude: 40.758,
@@ -124,7 +124,7 @@ export default {
         },
         {
           location_id: uuidv4(),
-          parent_location_id: barcelonaId,
+          parent_id: barcelonaId,
           name: 'Sagrada Familia',
           type: 'poi',
           latitude: 41.4036,

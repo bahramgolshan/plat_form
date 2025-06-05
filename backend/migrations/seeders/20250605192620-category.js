@@ -7,7 +7,7 @@ export default {
       [
         {
           category_id: uuidv4(),
-          parent_category_id: null,
+          parent_id: null,
           name: 'Tours',
           slug: 'tours',
           description: 'Guided tours and experiences',
@@ -18,7 +18,7 @@ export default {
         },
         {
           category_id: uuidv4(),
-          parent_category_id: null,
+          parent_id: null,
           name: 'Activities',
           slug: 'activities',
           description: 'Outdoor and indoor activities',
@@ -29,7 +29,7 @@ export default {
         },
         {
           category_id: uuidv4(),
-          parent_category_id: null,
+          parent_id: null,
           name: 'Transportation',
           slug: 'transportation',
           description: 'Vehicle rentals and transfers',
