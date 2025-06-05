@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize'
 
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ListingAvailabilities', {
+    await queryInterface.createTable('listing_availabilities', {
       availability_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -12,7 +12,7 @@ export default {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Listings',
+          model: 'listings',
           key: 'listing_id',
         },
         onDelete: 'CASCADE',
@@ -31,25 +31,25 @@ export default {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-    });
+    })
 
-    await queryInterface.addIndex('ListingAvailabilities', ['listing_id', 'date', 'start_time'], {
+    await queryInterface.addIndex('listing_availabilities', ['listing_id', 'date', 'start_time'], {
       unique: true,
-    });
-    await queryInterface.addIndex('ListingAvailabilities', ['date']);
+    })
+    await queryInterface.addIndex('listing_availabilities', ['date'])
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('ListingAvailabilities');
+    await queryInterface.dropTable('listing_availabilities')
   },
-};
+}

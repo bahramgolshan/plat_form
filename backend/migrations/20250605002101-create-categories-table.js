@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize'
 
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Categories', {
+    await queryInterface.createTable('categories', {
       category_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -11,7 +11,7 @@ export default {
       parent_category_id: {
         type: DataTypes.UUID,
         references: {
-          model: 'Categories',
+          model: 'categories',
           key: 'category_id',
         },
         onDelete: 'SET NULL',
@@ -32,23 +32,23 @@ export default {
         defaultValue: true,
       },
       metadata: DataTypes.JSONB,
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       deletedAt: DataTypes.DATE,
-    });
+    })
 
-    await queryInterface.addIndex('Categories', ['parent_category_id']);
+    await queryInterface.addIndex('categories', ['parent_category_id'])
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('Categories');
+    await queryInterface.dropTable('categories')
   },
-};
+}

@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize'
 
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('CategoryAttributes', {
+    await queryInterface.createTable('category_attributes', {
       attribute_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -12,7 +12,7 @@ export default {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Categories',
+          model: 'categories',
           key: 'category_id',
         },
         onDelete: 'CASCADE',
@@ -30,20 +30,20 @@ export default {
         defaultValue: false,
       },
       sort_order: DataTypes.INTEGER,
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       deletedAt: DataTypes.DATE,
-    });
+    })
 
-    await queryInterface.addIndex('CategoryAttributes', ['category_id', 'attribute_name'], {
+    await queryInterface.addIndex('category_attributes', ['category_id', 'attribute_name'], {
       unique: true,
-    });
+    })
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('CategoryAttributes');
+    await queryInterface.dropTable('category_attributes')
   },
-};
+}

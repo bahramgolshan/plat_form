@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize'
 
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PriceTiers', {
+    await queryInterface.createTable('price_tiers', {
       tier_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -12,7 +12,7 @@ export default {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Listings',
+          model: 'listings',
           key: 'listing_id',
         },
         onDelete: 'CASCADE',
@@ -38,18 +38,18 @@ export default {
       valid_from: DataTypes.DATE,
       valid_to: DataTypes.DATE,
       min_quantity: DataTypes.INTEGER,
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       deletedAt: DataTypes.DATE,
-    });
+    })
 
-    await queryInterface.addIndex('PriceTiers', ['listing_id']);
+    await queryInterface.addIndex('price_tiers', ['listing_id'])
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('PriceTiers');
+    await queryInterface.dropTable('price_tiers')
   },
-};
+}

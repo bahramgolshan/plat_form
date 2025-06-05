@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize'
 
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Listings', {
+    await queryInterface.createTable('listings', {
       listing_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -16,7 +16,7 @@ export default {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Categories',
+          model: 'categories',
           key: 'category_id',
         },
         onDelete: 'RESTRICT',
@@ -44,26 +44,26 @@ export default {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       deletedAt: DataTypes.DATE,
-    });
+    })
 
-    await queryInterface.addIndex('Listings', ['category_id']);
-    await queryInterface.addIndex('Listings', ['supplier_id']);
-    await queryInterface.addIndex('Listings', ['status']);
-    await queryInterface.addIndex('Listings', ['vertical_extension_type']);
+    await queryInterface.addIndex('listings', ['category_id'])
+    await queryInterface.addIndex('listings', ['supplier_id'])
+    await queryInterface.addIndex('listings', ['status'])
+    await queryInterface.addIndex('listings', ['vertical_extension_type'])
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('Listings');
+    await queryInterface.dropTable('listings')
   },
-};
+}

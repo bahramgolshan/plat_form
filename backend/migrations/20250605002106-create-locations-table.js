@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize'
 
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Locations', {
+    await queryInterface.createTable('locations', {
       location_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -11,7 +11,7 @@ export default {
       parent_location_id: {
         type: DataTypes.UUID,
         references: {
-          model: 'Locations',
+          model: 'locations',
           key: 'location_id',
         },
         onDelete: 'SET NULL',
@@ -29,24 +29,24 @@ export default {
       timezone: DataTypes.STRING(50),
       google_place_id: DataTypes.STRING(255),
       address_json: DataTypes.JSONB,
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       deletedAt: DataTypes.DATE,
-    });
+    })
 
-    await queryInterface.addIndex('Locations', ['parent_location_id']);
-    await queryInterface.addIndex('Locations', ['latitude', 'longitude']);
+    await queryInterface.addIndex('locations', ['parent_location_id'])
+    await queryInterface.addIndex('locations', ['latitude', 'longitude'])
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('Locations');
+    await queryInterface.dropTable('locations')
   },
-};
+}

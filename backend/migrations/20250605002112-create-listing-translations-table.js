@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize'
 
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ListingTranslations', {
+    await queryInterface.createTable('listing_translations', {
       translation_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -12,7 +12,7 @@ export default {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Listings',
+          model: 'listings',
           key: 'listing_id',
         },
         onDelete: 'CASCADE',
@@ -26,24 +26,24 @@ export default {
         allowNull: false,
       },
       description: DataTypes.TEXT,
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-    });
+    })
 
-    await queryInterface.addIndex('ListingTranslations', ['listing_id', 'language_code'], {
+    await queryInterface.addIndex('listing_translations', ['listing_id', 'language_code'], {
       unique: true,
-    });
+    })
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('ListingTranslations');
+    await queryInterface.dropTable('listing_translations')
   },
-};
+}

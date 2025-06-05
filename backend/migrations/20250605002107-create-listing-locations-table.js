@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize'
 
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ListingLocations', {
+    await queryInterface.createTable('listing_locations', {
       listing_location_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -12,7 +12,7 @@ export default {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Listings',
+          model: 'listings',
           key: 'listing_id',
         },
         onDelete: 'CASCADE',
@@ -21,27 +21,31 @@ export default {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
-          model: 'Locations',
+          model: 'locations',
           key: 'location_id',
         },
         onDelete: 'CASCADE',
       },
       stop_order: DataTypes.INTEGER,
       label: DataTypes.STRING(255),
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       deletedAt: DataTypes.DATE,
-    });
+    })
 
-    await queryInterface.addIndex('ListingLocations', ['listing_id', 'location_id', 'stop_order'], {
-      unique: true,
-    });
+    await queryInterface.addIndex(
+      'listing_locations',
+      ['listing_id', 'location_id', 'stop_order'],
+      {
+        unique: true,
+      }
+    )
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('ListingLocations');
+    await queryInterface.dropTable('listing_locations')
   },
-};
+}
