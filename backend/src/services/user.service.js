@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import httpStatus from 'http-status'
 import { db } from '../models/index.js'
-import ApiError from '../utils/ApiError.js'
+import ApiError from '../utils/api-error.util.js'
 
 const { User } = db
 

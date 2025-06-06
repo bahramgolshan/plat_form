@@ -8,13 +8,13 @@ export default (sequelize, DataTypes) => {
         primaryKey: true,
       },
       firstName: {
-        type: DataTypes.STRING(100),
         field: 'first_name',
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       lastName: {
-        type: DataTypes.STRING(100),
         field: 'last_name',
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       email: {
@@ -34,24 +34,34 @@ export default (sequelize, DataTypes) => {
         allowNull: true, // Allow null for social login users
       },
       isEmailVerified: {
+        field: 'is_email_verified',
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-        field: 'is_email_verified',
       },
       verificationToken: {
-        type: DataTypes.STRING,
         field: 'verification_token',
+        type: DataTypes.STRING,
       },
       lastLoginAt: {
-        type: DataTypes.DATE,
         field: 'last_login_at',
+        type: DataTypes.DATE,
+      },
+      createdAt: {
+        field: 'created_at',
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        field: 'updated_at',
+        type: DataTypes.DATE,
+      },
+      deletedAt: {
+        field: 'deleted_at',
+        type: DataTypes.DATE,
       },
     },
     {
       tableName: 'users',
       timestamps: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
       defaultScope: {
         attributes: { exclude: ['password'] },
       },
@@ -76,7 +86,7 @@ export default (sequelize, DataTypes) => {
     })
     User.hasOne(models.RefreshToken, {
       foreignKey: 'user_id',
-      as: 'RefreshToken',
+      as: 'refreshToken',
     })
     User.hasOne(models.SupplierProfile, {
       foreignKey: 'user_id',

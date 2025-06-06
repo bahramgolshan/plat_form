@@ -4,7 +4,7 @@ export default (sequelize) => {
   const Category = sequelize.define(
     'Category',
     {
-      category_id: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -20,14 +20,27 @@ export default (sequelize) => {
       },
       description: DataTypes.TEXT,
       icon: DataTypes.STRING(255),
-      is_active: {
+      isActive: {
+        field: 'is_active',
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
       metadata: DataTypes.JSONB,
+      createdAt: {
+        field: 'created_at',
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        field: 'updated_at',
+        type: DataTypes.DATE,
+      },
+      deletedAt: {
+        field: 'deleted_at',
+        type: DataTypes.DATE,
+      },
     },
     {
-      tableName: 'Categories',
+      tableName: 'categories',
       paranoid: true,
       timestamps: true,
     }
@@ -35,11 +48,11 @@ export default (sequelize) => {
 
   Category.associate = (models) => {
     Category.belongsTo(models.Category, {
-      foreignKey: 'parent_category_id',
+      foreignKey: 'parent_id',
       as: 'parent',
     })
     Category.hasMany(models.Category, {
-      foreignKey: 'parent_category_id',
+      foreignKey: 'parent_id',
       as: 'children',
     })
     Category.hasMany(models.CategoryAttribute, {

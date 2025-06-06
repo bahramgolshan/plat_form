@@ -21,12 +21,22 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      createdAt: {
+        field: 'created_at',
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        field: 'updated_at',
+        type: DataTypes.DATE,
+      },
+      deletedAt: {
+        field: 'deleted_at',
+        type: DataTypes.DATE,
+      },
     },
     {
       tableName: 'roles',
       timestamps: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
     }
   )
 

@@ -1,10 +1,19 @@
 import express from 'express'
 import httpStatus from 'http-status'
-import authRoutes from './auth.routes.js'
-import adminRoutes from './admin.routes.js'
-import userRoutes from './user.routes.js'
+import publicRoutes from './public.route.js'
+import authRoutes from './auth.route.js'
+import adminRoutes from './admin.route.js'
+import userRoutes from './user.route.js'
 
 const router = express.Router()
+
+/**
+ * @swagger
+ * tags:
+ *   name: Public
+ *   description: Public endpoints
+ */
+router.use(publicRoutes)
 
 /**
  * @swagger

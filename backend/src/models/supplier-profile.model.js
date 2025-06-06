@@ -2,19 +2,23 @@ export default (sequelize, DataTypes) => {
   const SupplierProfile = sequelize.define(
     'SupplierProfile',
     {
-      user_id: {
+      userId: {
+        field: 'user_id',
         type: DataTypes.UUID,
         primaryKey: true,
       },
-      company_name: {
+      companyName: {
+        field: 'company_name',
         type: DataTypes.STRING,
         allowNull: false,
       },
-      company_website: {
+      companyWebsite: {
+        field: 'company_website',
         type: DataTypes.STRING,
         allowNull: true,
       },
-      tax_id: {
+      taxId: {
+        field: 'tax_id',
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -22,12 +26,22 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      createdAt: {
+        field: 'created_at',
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        field: 'updated_at',
+        type: DataTypes.DATE,
+      },
+      deletedAt: {
+        field: 'deleted_at',
+        type: DataTypes.DATE,
+      },
     },
     {
       tableName: 'supplier_profiles',
       timestamps: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
     }
   )
 

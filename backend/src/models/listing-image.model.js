@@ -2,30 +2,43 @@ import { DataTypes } from 'sequelize';
 
 export default (sequelize) => {
   const ListingImage = sequelize.define('ListingImage', {
-    image_id: {
+    id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    image_url: {
+    imageUrl: {
+      field: 'image_url',
       type: DataTypes.STRING(1024),
       allowNull: false,
     },
     caption: DataTypes.STRING(255),
-    sort_order: {
+    sortOrder: {
+      field: 'sort_order',
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    is_primary: {
+    isPrimary: {
+      field: 'is_primary',
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+      createdAt: {
+        field: 'created_at',
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        field: 'updated_at',
+        type: DataTypes.DATE,
+      },
+      deletedAt: {
+        field: 'deleted_at',
+        type: DataTypes.DATE,
+      },
   }, {
-    tableName: 'ListingImages',
+    tableName: 'listing_images',
     paranoid: true,
     timestamps: false,
-    createdAt: true,
-    updatedAt: false,
   });
 
   ListingImage.associate = (models) => {

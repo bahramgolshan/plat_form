@@ -238,6 +238,370 @@ plat_form/
 
 ---
 
+## ERD Schema
+
+```
+categories (
+  id uuid PK FK,
+  parent_id uuid PK,
+  name character varying NOT NULL,
+  slug character varying PK FK,
+  description text,
+  icon character varying,
+  is_active boolean DEFAULT true,
+  metadata jsonb,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+category_attributes (
+  id uuid PK FK,
+  category_id uuid PK,
+  name character varying NOT NULL,
+  type USER-DEFINED NOT NULL,
+  is_required boolean DEFAULT false,
+  sort_order integer,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+customer_profiles (
+  user_id uuid PK FK,
+  date_of_birth date,
+  gender character varying,
+  preferred_language character varying,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+employee_profiles (
+  user_id uuid PK FK,
+  department character varying,
+  notes text,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+listing_attribute_values (
+  id uuid PK FK,
+  listing_id uuid PK,
+  category_attribute_id uuid PK,
+  value text NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+listing_availabilities (
+  id uuid PK FK,
+  listing_id uuid PK,
+  date date NOT NULL,
+  start_time time without time zone,
+  end_time time without time zone,
+  available_quantity integer NOT NULL,
+  booked_quantity integer DEFAULT 0,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+listing_exclusions (
+  id uuid PK FK,
+  listing_id uuid PK,
+  exclusion_date date NOT NULL,
+  reason character varying,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+listing_images (
+  id uuid PK FK,
+  listing_id uuid PK,
+  image_url character varying NOT NULL,
+  caption character varying,
+  sort_order integer NOT NULL,
+  is_primary boolean DEFAULT false,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+listing_locations (
+  id uuid PK FK,
+  listing_id uuid PK,
+  location_id uuid PK,
+  stop_order integer,
+  label character varying,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+listing_schedules (
+  id uuid PK FK,
+  listing_id uuid PK,
+  day_of_week USER-DEFINED NOT NULL,
+  start_time time without time zone NOT NULL,
+  end_time time without time zone,
+  is_recurring boolean DEFAULT true,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+listing_tags (
+  listing_id uuid PK FK,
+  tag_id uuid PK FK,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+listing_translations (
+  id uuid PK FK,
+  listing_id uuid PK,
+  language_code character varying NOT NULL,
+  title character varying NOT NULL,
+  description text,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+listings (
+  id uuid PK FK,
+  supplier_id uuid NOT NULL,
+  category_id uuid PK,
+  vertical_extension_id uuid,
+  vertical_extension_type character varying,
+  title character varying NOT NULL,
+  description text,
+  base_price numeric,
+  currency character varying,
+  status USER-DEFINED NOT NULL,
+  instant_bookable boolean DEFAULT false,
+  cancellation_policy_id uuid,
+  average_rating numeric,
+  review_count integer DEFAULT 0,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+locations (
+  id uuid PK FK,
+  parent_id uuid PK,
+  name character varying NOT NULL,
+  type USER-DEFINED NOT NULL,
+  latitude numeric,
+  longitude numeric,
+  timezone character varying,
+  google_place_id character varying,
+  address_json jsonb,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+password_reset_tokens (
+  id uuid PK FK DEFAULT gen_random_uuid(),
+  user_id uuid PK,
+  token character varying NOT NULL,
+  expires_at timestamp with time zone NOT NULL,
+  is_used boolean NOT NULL DEFAULT false,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+price_tiers (
+  id uuid PK FK,
+  listing_id uuid PK,
+  label character varying NOT NULL,
+  min_age integer,
+  max_age integer,
+  amount numeric NOT NULL,
+  currency character varying NOT NULL,
+  is_default boolean DEFAULT false,
+  valid_from timestamp with time zone,
+  valid_to timestamp with time zone,
+  min_quantity integer,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+refresh_tokens (
+  id uuid PK FK DEFAULT gen_random_uuid(),
+  token character varying NOT NULL,
+  user_id uuid PK,
+  expires_at timestamp with time zone NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+roles (
+  id integer PK FK DEFAULT nextval('roles_id_seq'::regclass),
+  key character varying PK FK,
+  name character varying PK FK,
+  description character varying,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+supplier_profiles (
+  user_id uuid PK FK,
+  company_name character varying NOT NULL,
+  company_website character varying,
+  tax_id character varying,
+  address character varying,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+tags (
+  id uuid PK FK,
+  name character varying NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  deleted_at timestamp with time zone
+)
+
+user_roles (
+  id integer PK FK DEFAULT nextval('user_roles_id_seq'::regclass),
+  user_id uuid PK,
+  role_id integer PK,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+users (
+  id uuid PK FK,
+  first_name character varying NOT NULL,
+  last_name character varying NOT NULL,
+  email character varying PK FK,
+  phone character varying,
+  password character varying,
+  is_email_verified boolean DEFAULT false,
+  verification_token character varying,
+  last_login_at timestamp with time zone,
+  created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+bookings (
+  id uuid PK,
+  customer_id uuid FK -> users,
+  listing_id uuid FK -> listings,
+  status USER-DEFINED (pending, confirmed, cancelled, completed, refunded),
+  booking_reference character varying UNIQUE,
+  total_amount numeric NOT NULL,
+  currency character varying NOT NULL,
+  adult_count integer,
+  child_count integer,
+  infant_count integer,
+  special_requests text,
+  cancellation_reason text,
+  cancellation_fee numeric,
+  cancellation_processed_at timestamp with time zone,
+  starts_at timestamp with time zone,
+  ends_at timestamp with time zone,
+  created_at timestamp with time zone,
+  updated_at timestamp with time zone
+)
+
+booking_participants (
+  id uuid PK,
+  booking_id uuid FK -> bookings,
+  price_tier_id uuid FK -> price_tiers,
+  quantity integer NOT NULL,
+  first_name character varying,
+  last_name character varying,
+  age integer,
+  created_at timestamp with time zone
+)
+
+booking_availability_slots (
+  id uuid PK,
+  booking_id uuid FK -> bookings,
+  availability_id uuid FK -> listing_availabilities,
+  quantity integer NOT NULL,
+  created_at timestamp with time zone
+)
+
+payments (
+  id uuid PK,
+  booking_id uuid FK -> bookings,
+  customer_id uuid FK -> users,
+  amount numeric NOT NULL,
+  currency character varying NOT NULL,
+  payment_method_id uuid FK -> payment_methods,
+  status USER-DEFINED (pending, completed, failed, refunded),
+  gateway_reference character varying,
+  gateway_response jsonb,
+  captured_at timestamp with time zone,
+  created_at timestamp with time zone,
+  updated_at timestamp with time zone
+)
+
+payment_methods (
+  id uuid PK,
+  user_id uuid FK -> users,
+  type USER-DEFINED (credit_card, paypal, apple_pay, etc.),
+  details jsonb, -- encrypted payment details
+  is_default boolean DEFAULT false,
+  created_at timestamp with time zone,
+  updated_at timestamp with time zone,
+  deleted_at timestamp with time zone
+)
+
+invoices (
+  id uuid PK,
+  booking_id uuid FK -> bookings,
+  invoice_number character varying UNIQUE,
+  issue_date date NOT NULL,
+  due_date date NOT NULL,
+  status USER-DEFINED (draft, issued, paid, cancelled),
+  tax_amount numeric,
+  subtotal numeric NOT NULL,
+  total numeric NOT NULL,
+  currency character varying NOT NULL,
+  pdf_url character varying,
+  created_at timestamp with time zone,
+  updated_at timestamp with time zone
+)
+
+refunds (
+  id uuid PK,
+  payment_id uuid FK -> payments,
+  amount numeric NOT NULL,
+  currency character varying NOT NULL,
+  reason text,
+  status USER-DEFINED (requested, processing, completed, rejected),
+  processed_by uuid FK -> users, -- admin who processed
+  processed_at timestamp with time zone,
+  created_at timestamp with time zone,
+  updated_at timestamp with time zone
+)
+
+reviews (
+  id uuid PK,
+  booking_id uuid FK -> bookings,
+  listing_id uuid FK -> listings,
+  reviewer_id uuid FK -> users,
+  rating integer NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  title character varying,
+  comment text,
+  response_text text, -- supplier response
+  response_date timestamp with time zone,
+  is_verified boolean DEFAULT false, -- verified purchaser
+  status USER-DEFINED (pending, published, rejected),
+  created_at timestamp with time zone,
+  updated_at timestamp with time zone,
+  deleted_at timestamp with time zone
+)
+
+review_attributes (
+  id uuid PK,
+  review_id uuid FK -> reviews,
+  attribute_id uuid FK -> category_attributes,
+  rating integer NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  created_at timestamp with time zone
+)
+```
+
+---
+
 ## License
 
 MIT

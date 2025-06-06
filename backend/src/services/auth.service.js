@@ -3,10 +3,10 @@ import jwt from 'jsonwebtoken'
 import httpStatus from 'http-status'
 import { v4 as uuidv4 } from 'uuid'
 import nodemailer from 'nodemailer'
-import ApiError from '../utils/ApiError.js'
+import ApiError from '../utils/api-error.util.js'
 import redisClient from '../config/redis.config.js'
 import emailService from '../services/email.service.js'
-import logger from '../utils/logger.js'
+import logger from '../utils/logger.util.js'
 import { ROLE_KEYS } from '../constants/roles.js'
 import { db } from '../models/index.js'
 import { config } from '../config/index.js'
@@ -24,11 +24,10 @@ const generateToken = (userId, expires, type, secret = config.jwtSecret) => {
 }
 
 const saveRefreshToken = async (token, userId, expires) => {
-  console.log('hereeeeeeee \n', userId)
   await RefreshToken.create({
     token,
-    user_id: userId,
-    expires_at: new Date(expires * 1000),
+    userId,
+    expiresAt: new Date(expires * 1000),
   })
 }
 
@@ -76,8 +75,8 @@ const register = async (userData) => {
     if (!defaultRole) throw new ApiError(500, 'Default role not found')
 
     await UserRole.create({
-      user_id: user.id,
-      role_id: defaultRole.id,
+      userId: user.id,
+      roleId: defaultRole.id,
     })
 
     const [tokens, roles] = await Promise.all([
@@ -151,7 +150,7 @@ const refreshAuthToken = async (refreshToken) => {
     const refreshTokenDoc = await RefreshToken.findOne({
       where: {
         token: refreshToken,
-        user_id: payload.sub,
+        userId: payload.sub,
       },
     })
 
@@ -209,8 +208,8 @@ const sendPasswordResetEmail = async (email) => {
 
   await PasswordResetToken.create({
     token,
-    user_id: user.id,
-    expires_at: expiresAt,
+    userId: user.id,
+    expiresAt: expiresAt,
   })
 
   const resetUrl = `${config.frontendUrl}/reset-password?token=${token}`
@@ -261,7 +260,7 @@ const resetPassword = async (token, newPassword) => {
   await passwordResetToken.save()
 
   // Invalidate all refresh tokens for this user
-  await RefreshToken.destroy({ where: { user_id: user.id } })
+  await RefreshToken.destroy({ where: { userId: user.id } })
 }
 
 const changePassword = async (userId, currentPassword, newPassword) => {

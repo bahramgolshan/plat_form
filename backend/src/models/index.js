@@ -13,7 +13,7 @@ import CustomerProfileModel from './customer-profile.model.js'
 import CategoryModel from './category.model.js'
 import CategoryAttributeModel from './category-attribute.model.js'
 import ListingModel from './listing.model.js'
-import ListingAttributeValueModel from './listing-attribute-value.model.js'
+import ListingAttributeModel from './listing-attribute-value.model.js'
 import ListingImageModel from './listing-image.model.js'
 import LocationModel from './location.model.js'
 import ListingLocationModel from './listing-location.model.js'
@@ -52,7 +52,7 @@ db.EmployeeProfile = EmployeeProfileModel(sequelize, Sequelize)
 db.Category = CategoryModel(sequelize, Sequelize)
 db.CategoryAttribute = CategoryAttributeModel(sequelize, Sequelize)
 db.Listing = ListingModel(sequelize, Sequelize)
-db.ListingAttributeValue = ListingAttributeValueModel(sequelize, Sequelize)
+db.ListingAttribute = ListingAttributeModel(sequelize, Sequelize)
 db.ListingImage = ListingImageModel(sequelize, Sequelize)
 db.Location = LocationModel(sequelize, Sequelize)
 db.ListingLocation = ListingLocationModel(sequelize, Sequelize)

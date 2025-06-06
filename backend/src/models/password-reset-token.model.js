@@ -7,28 +7,41 @@ export default (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      user_id: {
+      userId: {
+        field: 'user_id',
         type: DataTypes.UUID,
         allowNull: false,
-    },
+      },
       token: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      expires_at: {
+      expiresAt: {
+        field: 'expires_at',
         type: DataTypes.DATE,
         allowNull: false,
       },
-      used: {
+      isUsed: {
+        field: 'is_used',
         type: DataTypes.BOOLEAN,
         defaultValue: false,
+      },
+      createdAt: {
+        field: 'created_at',
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        field: 'updated_at',
+        type: DataTypes.DATE,
+      },
+      deletedAt: {
+        field: 'deleted_at',
+        type: DataTypes.DATE,
       },
     },
     {
       tableName: 'password_reset_tokens',
       timestamps: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
     }
   )
 
