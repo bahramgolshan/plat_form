@@ -1,6 +1,4 @@
-import { ListingService } from '../services/listing.service.js'
-
-const listingService = new ListingService()
+import ListingService from '../services/listing.service.js'
 
 const getListings = async (req, res, next) => {
   try {
@@ -41,9 +39,61 @@ const getFeaturedListings = async (req, res, next) => {
   }
 }
 
+const searchListings = async (req, res, next) => {
+  try {
+    const { keyword, category, minPrice, maxPrice, limit = 10, offset = 0 } = req.query
+    const listings = await listingService.searchListings({
+      keyword,
+      category,
+      minPrice,
+      maxPrice,
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+    })
+    res
+      .status(httpStatus.OK)
+      .json(new ApiResponse(httpStatus.OK, listings, 'Listings retrieved successfully'))
+  } catch (error) {
+    next(error)
+  }
+}
+
+const getNearbyListings = async (req, res, next) => {
+  try {
+    const { lat, lng, radius = 10, limit = 10, offset = 0 } = req.query
+    const listings = await listingService.getNearbyListings({
+      latitude: parseFloat(lat),
+      longitude: parseFloat(lng),
+      radius: parseFloat(radius),
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+    })
+    res
+      .status(httpStatus.OK)
+      .json(new ApiResponse(httpStatus.OK, listings, 'Nearby listings retrieved successfully'))
+  } catch (error) {
+    next(error)
+  }
+}
+
+const getListingImages = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const images = await listingService.getListingImages(id)
+    res
+      .status(httpStatus.OK)
+      .json(new ApiResponse(httpStatus.OK, images, 'Listing images retrieved successfully'))
+  } catch (error) {
+    next(error)
+  }
+}
+
 export default {
   getListings,
   getListingDetails,
   checkAvailability,
   getFeaturedListings,
+  searchListings,
+  getNearbyListings,
+  getListingImages,
 }
